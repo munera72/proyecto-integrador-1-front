@@ -3,11 +3,11 @@ import Navbar from '../components/navbar';
 
 const Home = () => {
     return (
-        <div class="container">
+        <div className="container">
             <Navbar></Navbar>
-                <div class="main">
+                <div className="main">
                     <h1>Bienvenido al sistema de<br/>detección de nanomateriales</h1>
-                    <button class="start-btn">Iniciar proceso</button>
+                    <button className="start-btn">Iniciar proceso</button>
                 </div>
         </div>
     );

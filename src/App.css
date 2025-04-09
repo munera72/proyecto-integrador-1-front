@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+.test {
+  border: red solid 1px;
+}
+
 .App {
   text-align: center;
 }
@@ -37,6 +43,21 @@
   }
 }
 
+.btn {
+  border-radius: 5px;
+  padding: 5px 15px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #fff;
+  border: none
+}
+
+.secondary-btn {
+  background-color: #8cc63e;
+}
+
 .container {
   border: 2px solid #333;
   border-radius: 10px;
@@ -57,24 +78,32 @@
   border-top-right-radius: 10px;
 }
 
-.navbar .logo {
-  font-weight: bold;
-}
-
-.navbar img {
-  width:5%;
-  display: block;
-}
-
-
-.navbar .about-btn {
-  background-color: #a5d6a7;
-  border: none;
-  border-radius: 20px;
-  padding: 5px 15px;
-  font-size: 14px;
-  color: #0b5e20;
+.navbar-brand {
   display: flex;
   align-items: center;
-  cursor: pointer;
+  justify-content: left;
+  width: 50%;
+  height: 100%;
+}
+.navbar-brand img {
+  width: 15%;
+}
+
+.navbar-btns {
+  display: flex;
+  justify-content: right;
+  width: 50%;
+}
+
+.navbar-btns .btn{
+  margin: 5px;
+  font-size: 20px;
+  font-family: "Roboto", monospace;
+}
+
+.navbar .logo {
+  font-size: 1.3em;
+  margin: 0 5px;
+  font-family: 'Times New Roman', Times, serif;
+
 }
