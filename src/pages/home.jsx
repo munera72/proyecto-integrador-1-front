@@ -7,7 +7,7 @@ const Home = () => {
             <Navbar></Navbar>
                 <div className="main">
                     <h1>Bienvenido al sistema de<br/>detección de nanomateriales</h1>
-                    <button className="start-btn">Iniciar proceso</button>
+                    <button className="btn primary-btn">Iniciar proceso</button>
                 </div>
         </div>
     );

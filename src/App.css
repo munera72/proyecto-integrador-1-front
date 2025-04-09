@@ -54,8 +54,12 @@
   border: none
 }
 
+.primary-btn {
+  background-color: #026937;
+}
+
 .secondary-btn {
-  background-color: #8cc63e;
+  background-color: #8dc63f;
 }
 
 .container {
