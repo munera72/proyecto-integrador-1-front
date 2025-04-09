@@ -36,3 +36,45 @@
     transform: rotate(360deg);
   }
 }
+
+.container {
+  border: 2px solid #333;
+  border-radius: 10px;
+  margin: 40px auto;
+  max-width: 700px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.navbar {
+  background-color: #0b5e20;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.navbar .logo {
+  font-weight: bold;
+}
+
+.navbar img {
+  width:5%;
+  display: block;
+}
+
+
+.navbar .about-btn {
+  background-color: #a5d6a7;
+  border: none;
+  border-radius: 20px;
+  padding: 5px 15px;
+  font-size: 14px;
+  color: #0b5e20;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
