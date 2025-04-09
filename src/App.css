@@ -51,7 +51,8 @@
   align-items: center;
   cursor: pointer;
   color: #fff;
-  border: none
+  border: none;
+  font-family: "Roboto", sans-serif;
 }
 
 .primary-btn {
@@ -65,10 +66,25 @@
 .container {
   border: 2px solid #333;
   border-radius: 10px;
-  margin: 40px auto;
-  max-width: 700px;
+  margin: 20px auto;
+  max-width: 70%;
+  min-width: 70%;
+  height: 90vh;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+  height: 90%;
+}
+
+.main button {
+  font-size: 25px;
+  width: 150px;
 }
 
 .navbar {
