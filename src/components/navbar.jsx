@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../assets/escudo-udea.png';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return (
@@ -9,9 +10,11 @@ const Navbar = () => {
                 <div className="logo">Universidad de Antioquia</div>
             </div>
             <div className='navbar-btns'>
-                <button className='btn secondary-btn'>
-                    Inicio
-                </button>
+                <Link className='link'  to={'/'}>
+                    <button className='btn secondary-btn'>
+                        Inicio
+                    </button>
+                </Link>
                 <button className="btn secondary-btn">Acerca de</button>
             </div>
         </div>

@@ -101,6 +101,10 @@
   max-height: 10%;
 }
 
+.navbar .link {
+ text-decoration: none;
+}
+
 .navbar-brand {
   display: flex;
   align-items: center;
