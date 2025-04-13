@@ -39,6 +39,7 @@ const ProgressBar = () => {
     return (
       <div className="container">
         <Navbar />
+        <hr />
         <div className="main">
           <h2 className="text-xl mb-4">Análisis en progreso</h2>
   
