@@ -34,6 +34,11 @@
   color: #61dafb;
 }
 
+.link {
+  text-decoration: none;
+ }
+ 
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -101,10 +106,6 @@
   max-height: 10%;
 }
 
-.navbar .link {
- text-decoration: none;
-}
-
 .navbar-brand {
   display: flex;
   align-items: center;
@@ -129,8 +130,9 @@
 }
 
 .navbar .logo {
-  font-size: 1.3em;
-  margin: 0 5px;
-  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.45em;
+  margin: 0 15px;
+  font-family: "Roboto", monospace;
+
 
 }
