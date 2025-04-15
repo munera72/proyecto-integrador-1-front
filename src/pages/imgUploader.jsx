@@ -16,6 +16,10 @@ const ImgUploader = () => {
         }
     }
 
+    const displayProcessingSelection = () => {
+        console.log(document.getElementById('processing-methods-select').value)
+    }
+
 
     return (
         <div className="container">
@@ -39,12 +43,21 @@ const ImgUploader = () => {
                         <div class="image-placeholder">
                             <img style={{width: 'inherit'}} src={file} alt="" />
                         </div>
+                        <button>
+                            Next
+                        </button>
                         <div class="image-buttons-box">
                             <div style={{display: 'flex', flexDirection: 'column', borderRadius: '10px', backgroundColor: '#8dc63f', padding: '5px 15px', fontFamily: 'Roboto, sans-serif', color: 'white'}}>
-                                <label htmlFor='upload-images'>Seleccionar imágenes</label>
+                                <label >Seleccionar imágenes</label>
                                 <input id='upload-images' type='file' accept='image/png' multiple onChange={getFile} className='img-input'/>
                             </div>
-                            <button className='secondary-btn'>Preprocesar imagen</button>
+                            <button onClick={displayProcessingSelection} className='secondary-btn'>Procesar imagen</button>
+                            <select name='methods' id='processing-methods-select'>
+                                <option value='gauss'>Filtro Gaussiano</option>
+                                <option value='mediana'>Filtro de Mediana</option>
+                                <option value='contorno'>Mejora de Contorno</option>
+                                <option value='segmentar'>Segmentación</option>
+                            </select>
                         </div>
                         <Link to='/progressBar'>
                             <button class="analyze-button primary-btn">Analizar</button>
