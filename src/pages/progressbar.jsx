@@ -9,6 +9,8 @@ const ProgressBar = () => {
     const [showConfirm, setShowConfirm] = useState(false);
     const [cancelled, setCancelled] = useState(false);
     const navigate = useNavigate();
+    const [seconds, setSeconds] = useState(0);
+
   
     const steps = ["Iniciando", "Analizando", "Finalizado"];
     const progress = [20, 60, 100];
@@ -21,11 +23,22 @@ const ProgressBar = () => {
           setStep(i);
         } else {
           clearInterval(interval);
+          setTimeout(() => {
+            navigate("/results");
+          }, 1000);
         }
       }, 2000);
-      return () => clearInterval(interval);
-    }, []);
-  
+    
+      const timer = setInterval(() => {
+        setSeconds((prev) => prev + 1);
+      }, 1000);
+    
+      return () => {
+        clearInterval(interval);
+        clearInterval(timer);
+      };
+    }, [navigate, steps.length]);
+    
     const handleCancelConfirm = () => setShowConfirm(true);
     const handleCancel = () => setShowConfirm(false);
     const handleAccept = () => {
@@ -51,6 +64,8 @@ const ProgressBar = () => {
               {steps[step]}
             </div>
           </div>
+          <p className="mt-2 text-gray-600">Tiempo transcurrido: {seconds} segundos</p>
+
   
           <button className="start-btn mt-6" onClick={handleCancelConfirm}>
             Detener análisis
@@ -76,6 +91,7 @@ const ProgressBar = () => {
           )}
         </div>
       </div>
+      
     );
   };
   
