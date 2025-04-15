@@ -66,13 +66,13 @@ hr {
     color: #f9a02d;
   }
 
-  .upload-buttons {
+  .image-buttons-box {
     display: flex;
     gap: 20px;
     margin-top: 10px;
   }
 
-  .upload-buttons button {
+  .image-buttons-box button {
     padding: 10px 20px;
     font-size: 14px;
     border-radius: 10px;

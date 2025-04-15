@@ -1,9 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Navbar from '../components/navbar';
 import '../styles/imgUploader.css'
 import { Link } from 'react-router-dom';
 
+
 const ImgUploader = () => {
+
+    const [file, setFile] = useState()
+    const getFile = (event) => {
+        try{
+            console.log(event.target.files)
+            setFile(URL.createObjectURL(event.target.files[0]))
+        } catch {
+            setFile(file)
+        }
+    }
+
+
     return (
         <div className="container">
             <Navbar/>
@@ -23,9 +36,14 @@ const ImgUploader = () => {
                 </div>
                 <div class="upload-box">
                     <div class="upload-content">
-                        <div class="image-placeholder">🖼️</div>
-                        <div class="upload-buttons">
-                            <button className='secondary-btn'>Cargar imagen</button>
+                        <div class="image-placeholder">
+                            <img style={{width: 'inherit'}} src={file} alt="" />
+                        </div>
+                        <div class="image-buttons-box">
+                            <div style={{display: 'flex', flexDirection: 'column', borderRadius: '10px', backgroundColor: '#8dc63f', padding: '5px 15px', fontFamily: 'Roboto, sans-serif', color: 'white'}}>
+                                <label htmlFor='upload-images'>Seleccionar imágenes</label>
+                                <input id='upload-images' type='file' accept='image/png' multiple onChange={getFile} className='img-input'/>
+                            </div>
                             <button className='secondary-btn'>Preprocesar imagen</button>
                         </div>
                         <Link to='/progressBar'>
