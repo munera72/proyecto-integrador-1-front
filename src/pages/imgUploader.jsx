@@ -75,7 +75,7 @@ const ImgUploader = () => {
                 <div class="upload-box">
                     <div class="upload-content">
                         <div class="image-placeholder">
-                            <img style={{width: 'inherit'}} src={displayedImage} alt="" />
+                            <img style={{width: 'inherit', height: 'inherit'}} src={displayedImage} alt="" />
                         </div>
                         <div className='control-box'>
                             <button className='secondary-btn btn' onClick={lastImage}>
