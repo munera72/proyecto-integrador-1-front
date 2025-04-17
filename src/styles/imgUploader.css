@@ -66,6 +66,12 @@ hr {
     color: #f9a02d;
   }
 
+  .control-box {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+  }
+
   .image-buttons-box {
     display: flex;
     gap: 20px;
