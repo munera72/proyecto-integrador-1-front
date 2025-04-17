@@ -15,7 +15,9 @@ const Navbar = () => {
                         Inicio
                     </button>
                 </Link>
+                <Link className='link'  to={'/about'}>
                 <button className="btn secondary-btn">Acerca de</button>
+                </Link>
             </div>
         </div>
     );

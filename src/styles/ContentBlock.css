@@ -1,5 +1,4 @@
 .content-block {
-    border: 1px solid black;
     padding: 10px;
     border-radius: 8px;
     text-align: center;
@@ -7,17 +6,22 @@
     flex-direction: column;
     align-items: center;
     gap: 6px;
-    margin: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
   
   .content-text {
     color: #333;
-    font-size: 3rem;
+    font-size: 1rem;
+    text-align: justify;
+    max-width: 600px;
+    height: auto;
   }
   
   .content-image {
-    max-width: 256px;
-    height: auto;
+    max-block-size: 300px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
