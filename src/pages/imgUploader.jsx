@@ -75,7 +75,7 @@ const ImgUploader = () => {
                 <div class="upload-box">
                     <div class="upload-content">
                         <div class="image-placeholder">
-                            <img style={{width: 'inherit', height: 'inherit'}} src={displayedImage} alt="" />
+                            <img style={{maxWidth: '512px', maxHeight: '512px'}} src={displayedImage} alt="" />
                         </div>
                         <div className='control-box'>
                             <button className='secondary-btn btn' onClick={lastImage}>
@@ -90,6 +90,7 @@ const ImgUploader = () => {
                                 <label >Seleccionar imágenes</label>
                                 <input id='upload-images' type='file' accept='image/png' multiple onChange={getFiles} className='img-input'/>
                             </div>
+                            
                             <button onClick={displayProcessingMethodSelection} className='secondary-btn'>Procesar imagen</button>
                             <select name='methods' id='processing-methods-select'>
                                 <option value='gauss'>Filtro Gaussiano</option>
