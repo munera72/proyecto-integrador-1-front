@@ -1,26 +1,35 @@
 import React, {useState} from 'react';
 import Navbar from '../components/navbar';
 import '../styles/imgUploader.css'
-import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 
 let uploadedImages = []
 let imgIndex = 0
 
 const ImgUploader = () => {
-
-    const [displayedImage, setDisplayedImage] = useState()
+    const [displayedImage, setDisplayedImage] = useState();
+    const [errorMsg, setErrorMsg] = useState('');
+    const [isAnalyzeDisabled, setIsAnalyzeDisabled] = useState(false);
+    const navigate = useNavigate();
 
     const getFiles = (event) => {
-
         imgIndex = 0
         uploadedImages = []
 
         const files = event.target.files;
 
+        if (files.length > 10) {
+            setErrorMsg('⚠️ Sólo puedes subir hasta 10 imágenes.');
+            setIsAnalyzeDisabled(true);
+            return;
+        } else {
+            setErrorMsg('');
+            setIsAnalyzeDisabled(false);
+        }
+
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
-            try{
+            try {
                 uploadedImages.push(URL.createObjectURL(file))
             } catch {
                 console.log("")
@@ -28,7 +37,6 @@ const ImgUploader = () => {
         }
 
         setDisplayedImage(uploadedImages[imgIndex])
-        
     }
 
     const nextImage = () => {
@@ -46,7 +54,6 @@ const ImgUploader = () => {
         } else {
             imgIndex--
         }
-
         setDisplayedImage(uploadedImages[imgIndex])
     }
 
@@ -54,14 +61,22 @@ const ImgUploader = () => {
         console.log(document.getElementById('processing-methods-select').value)
     }
 
+    const handleAnalyzeClick = (e) => {
+        if (uploadedImages.length === 0) {
+            setErrorMsg('⚠️ No se ha subido ninguna imagen.');
+            e.preventDefault(); // prevent navigation
+        } else {
+            navigate('/progressBar');
+        }
+    }
 
     return (
         <div className="container">
             <Navbar/>
             <hr/>
             <div className='main-container '>
-                <div class="info-box">
-                    <div class="info-content">
+                <div className="info-box">
+                    <div className="info-content">
                         <h3>Recuerda que</h3>
                         <ul>
                             <li>La imagen no debe ser mayor a 5MB</li>
@@ -70,11 +85,12 @@ const ImgUploader = () => {
                             <li>La resolución aceptada es de 300dpi</li>
                             <li>Sólo puedes subir hasta 10 imágenes</li>
                         </ul>
+                        {errorMsg && <p style={{ color: 'red', marginTop: '10px' }}>{errorMsg}</p>}
                     </div>
                 </div>
-                <div class="upload-box">
-                    <div class="upload-content">
-                        <div class="image-placeholder">
+                <div className="upload-box">
+                    <div className="upload-content">
+                        <div className="image-placeholder">
                             <img style={{maxWidth: '512px', maxHeight: '512px'}} src={displayedImage} alt="" />
                         </div>
                         <div className='control-box'>
@@ -85,12 +101,12 @@ const ImgUploader = () => {
                                 Siguiente
                             </button>
                         </div>
-                        <div class="image-buttons-box">
+                        <div className="image-buttons-box">
                             <div style={{display: 'flex', flexDirection: 'column', borderRadius: '10px', backgroundColor: '#8dc63f', padding: '5px 15px', fontFamily: 'Roboto, sans-serif', color: 'white'}}>
-                                <label >Seleccionar imágenes</label>
+                                <label>Seleccionar imágenes</label>
                                 <input id='upload-images' type='file' accept='image/png' multiple onChange={getFiles} className='img-input'/>
                             </div>
-                            
+
                             <button onClick={displayProcessingMethodSelection} className='secondary-btn'>Procesar imagen</button>
                             <select name='methods' id='processing-methods-select'>
                                 <option value='gauss'>Filtro Gaussiano</option>
@@ -99,9 +115,9 @@ const ImgUploader = () => {
                                 <option value='segmentar'>Segmentación</option>
                             </select>
                         </div>
-                        <Link to='/progressBar'>
-                            <button class="analyze-button primary-btn">Analizar</button>
-                        </Link>
+                        <button className="analyze-button primary-btn" disabled={isAnalyzeDisabled} onClick={handleAnalyzeClick}>
+                            Analizar
+                        </button>
                     </div>
                 </div>
             </div>
