@@ -13,13 +13,21 @@ const ImgUploader = () => {
     const navigate = useNavigate();
 
     const getFiles = (event) => {
+        const files = event.target.files;
+
+        try {
+            URL.createObjectURL(files[0])
+        } catch (e) {
+            console.log(e)
+            return
+        }
         imgIndex = 0
         uploadedImages = []
 
-        const files = event.target.files;
 
         if (files.length > 10) {
             setErrorMsg('⚠️ Sólo puedes subir hasta 10 imágenes.');
+            setDisplayedImage('')
             setIsAnalyzeDisabled(true);
             return;
         } else {
@@ -32,7 +40,7 @@ const ImgUploader = () => {
             try {
                 uploadedImages.push(URL.createObjectURL(file))
             } catch {
-                console.log("")
+                console.log("No images uploaded")
             }
         }
 
