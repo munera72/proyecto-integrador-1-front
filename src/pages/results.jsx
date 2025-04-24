@@ -11,7 +11,7 @@ function Results(){
                 <div className="logo">Resultados del analisis</div>
             </div>
             <hr />
-            <embed src="/Prueba.pdf" width="1535" height="1000" type="application/pdf" />
+            <embed src="/Prueba.pdf" width="auto" height="1000" type="application/pdf" />
         </div>
         )
     }
