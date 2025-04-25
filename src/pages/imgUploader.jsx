@@ -7,6 +7,7 @@ let uploadedImages = []
 let imgIndex = 0
 
 const ImgUploader = () => {
+
     const [displayedImage, setDisplayedImage] = useState();
     const [errorMsg, setErrorMsg] = useState('');
     const [isAnalyzeDisabled, setIsAnalyzeDisabled] = useState(false);
@@ -15,14 +16,17 @@ const ImgUploader = () => {
     const getFiles = (event) => {
         const files = event.target.files;
 
+        imgIndex = 0
+        uploadedImages = []
+
         try {
             URL.createObjectURL(files[0])
         } catch (e) {
-            console.log(e)
+            if (files.length === 0) {
+                setIsAnalyzeDisabled(true);
+            }
             return
         }
-        imgIndex = 0
-        uploadedImages = []
 
 
         if (files.length > 10) {
