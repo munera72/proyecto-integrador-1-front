@@ -9,8 +9,6 @@ async function uploadImages(formData) {
         method: "POST",
         body: formData,
     });
-    // console.log(formData);
-    console.log(response);
     if (!response.ok) {
         throw new Error("Error uploading images");
     }
