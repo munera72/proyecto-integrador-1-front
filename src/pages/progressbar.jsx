@@ -2,9 +2,25 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/navbar";
 import '../styles/progressbar.css';
+import { formData } from "./imgUploader"; 
 
+async function uploadImages(formData) {
+    const response = await fetch("http://localhost:8000/images/upload/", {
+        method: "POST",
+        body: formData,
+    });
+    // console.log(formData);
+    console.log(response);
+    if (!response.ok) {
+        throw new Error("Error uploading images");
+    }
+    return response.json();
+}
 
 const ProgressBar = () => {
+
+    uploadImages(formData)
+
     const [step, setStep] = useState(0);
     const [showConfirm, setShowConfirm] = useState(false);
     const [cancelled, setCancelled] = useState(false);

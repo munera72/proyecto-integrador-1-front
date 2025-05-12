@@ -6,6 +6,22 @@ import { useNavigate } from 'react-router-dom';
 let uploadedImages = []
 let imgIndex = 0
 
+export let formData;
+
+export function createFormData() {
+    const formData = new FormData();
+    const files = document.getElementById('upload-images').files;
+    for (let i = 0; i < files.length; i++) {
+        formData.append('files', files[i]);
+        console.log("File added to FormData:", files[i], "image " + (i + 1));
+    }
+
+    console.log("Images added to FormData:", files);
+    console.log("FormData created:", formData);
+
+    return formData;
+}
+
 const ImgUploader = () => {
 
     const [displayedImage, setDisplayedImage] = useState();
@@ -78,6 +94,8 @@ const ImgUploader = () => {
             setErrorMsg('⚠️ No se ha subido ninguna imagen.');
             e.preventDefault(); // prevent navigation
         } else {
+            formData = createFormData();
+            console.log(formData);
             navigate('/progressBar');
         }
     }
@@ -116,7 +134,7 @@ const ImgUploader = () => {
                         <div className="image-buttons-box">
                             <div style={{display: 'flex', flexDirection: 'column', borderRadius: '10px', backgroundColor: '#8dc63f', padding: '5px 15px', fontFamily: 'Roboto, sans-serif', color: 'white'}}>
                                 <label>Seleccionar imágenes</label>
-                                <input id='upload-images' type='file' accept='image/png' multiple onChange={getFiles} className='img-input'/>
+                                <input name="images" id='upload-images' type='file' accept='image/png' multiple onChange={getFiles} className='img-input'/>
                             </div>
 
                             <button onClick={displayProcessingMethodSelection} className='secondary-btn'>Procesar imagen</button>
