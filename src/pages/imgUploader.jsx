@@ -13,11 +13,7 @@ export function createFormData() {
     const files = document.getElementById('upload-images').files;
     for (let i = 0; i < files.length; i++) {
         formData.append('files', files[i]);
-        console.log("File added to FormData:", files[i], "image " + (i + 1));
     }
-
-    console.log("Images added to FormData:", files);
-    console.log("FormData created:", formData);
 
     return formData;
 }
@@ -95,7 +91,6 @@ const ImgUploader = () => {
             e.preventDefault(); // prevent navigation
         } else {
             formData = createFormData();
-            console.log(formData);
             navigate('/progressBar');
         }
     }
