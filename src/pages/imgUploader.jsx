@@ -131,14 +131,14 @@ const ImgUploader = () => {
                                 <label>Seleccionar imágenes</label>
                                 <input name="images" id='upload-images' type='file' accept='image/png' multiple onChange={getFiles} className='img-input'/>
                             </div>
-
+{/* 
                             <button onClick={displayProcessingMethodSelection} className='secondary-btn'>Procesar imagen</button>
                             <select name='methods' id='processing-methods-select'>
                                 <option value='gauss'>Filtro Gaussiano</option>
                                 <option value='mediana'>Filtro de Mediana</option>
                                 <option value='contorno'>Mejora de Contorno</option>
                                 <option value='segmentar'>Segmentación</option>
-                            </select>
+                            </select> */}
                         </div>
                         <button className="analyze-button primary-btn" disabled={isAnalyzeDisabled} onClick={handleAnalyzeClick}>
                             Analizar
