@@ -4,20 +4,27 @@ import Navbar from "../components/navbar";
 import '../styles/progressbar.css';
 import { formData } from "./imgUploader"; 
 
+export let file_name;
+
 async function uploadImages(formData) {
-    const response = await fetch("http://localhost:8000/images/upload/", {
-        method: "POST",
-        body: formData,
-    });
-    if (!response.ok) {
-        throw new Error("Error uploading images");
-    }
-    return response.json();
+  const response = await fetch("http://localhost:8000/images/upload/", {
+    method: "POST",
+    body: formData,
+  });
+  if (!response.ok) {
+    throw new Error("Error uploading images");
+  }
+  const data = await response.json();
+  file_name = data.file_name;
+  return data;
 }
+
 
 const ProgressBar = () => {
 
+  useEffect(() => {
     uploadImages(formData)
+  }, []);
 
     const [step, setStep] = useState(0);
     const [showConfirm, setShowConfirm] = useState(false);
