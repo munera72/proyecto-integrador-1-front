@@ -8,13 +8,17 @@ let imgIndex = 0
 
 export let formData;
 
+// Store image info with filename and selected method
+let imageProcessingList = [];
+
 export function createFormData() {
     const formData = new FormData();
     const files = document.getElementById('upload-images').files;
     for (let i = 0; i < files.length; i++) {
         formData.append('files', files[i]);
     }
-
+    // Add processing_data as a JSON string
+    formData.append('processing_data', JSON.stringify({ methods: imageProcessingList }));
     return formData;
 }
 
@@ -23,6 +27,8 @@ const ImgUploader = () => {
     const [displayedImage, setDisplayedImage] = useState();
     const [errorMsg, setErrorMsg] = useState('');
     const [isAnalyzeDisabled, setIsAnalyzeDisabled] = useState(false);
+    const [selectedMethod, setSelectedMethod] = useState('');
+    const [_, forceUpdate] = useState(0); // for re-rendering
     const navigate = useNavigate();
 
     const getFiles = (event) => {
@@ -30,6 +36,7 @@ const ImgUploader = () => {
 
         imgIndex = 0
         uploadedImages = []
+        imageProcessingList = []
 
         try {
             URL.createObjectURL(files[0])
@@ -39,7 +46,6 @@ const ImgUploader = () => {
             }
             return
         }
-
 
         if (files.length > 10) {
             setErrorMsg('⚠️ Sólo puedes subir hasta 10 imágenes.');
@@ -54,13 +60,20 @@ const ImgUploader = () => {
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
             try {
-                uploadedImages.push(URL.createObjectURL(file))
+                uploadedImages.push(URL.createObjectURL(file));
+                // Add to processing list with empty method
+                imageProcessingList.push({
+                    image: file.name,
+                    method: ""
+                });
             } catch {
                 console.log("No images uploaded")
             }
         }
 
-        setDisplayedImage(uploadedImages[imgIndex])
+        setDisplayedImage(uploadedImages[imgIndex]);
+        setSelectedMethod(""); // reset method selection
+        forceUpdate(n => n + 1); // re-render
     }
 
     const nextImage = () => {
@@ -69,7 +82,9 @@ const ImgUploader = () => {
         } else {
             imgIndex++
         }
-        setDisplayedImage(uploadedImages[imgIndex])
+        setDisplayedImage(uploadedImages[imgIndex]);
+        setSelectedMethod(imageProcessingList[imgIndex]?.method || "");
+        forceUpdate(n => n + 1);
     }
 
     const lastImage = () => {
@@ -78,14 +93,29 @@ const ImgUploader = () => {
         } else {
             imgIndex--
         }
-        setDisplayedImage(uploadedImages[imgIndex])
+        setDisplayedImage(uploadedImages[imgIndex]);
+        setSelectedMethod(imageProcessingList[imgIndex]?.method || "");
+        forceUpdate(n => n + 1);
     }
 
+    // When user selects a method for the current image
     const setProcessingMethodSelection = () => {
-        console.log(document.getElementById('processing-methods-select').value)
+        const method = document.getElementById('processing-methods-select').value;
+        imageProcessingList[imgIndex].method = method;
+        setSelectedMethod(method);
+        forceUpdate(n => n + 1);
     }
 
-    const handleAnalyzeClick = (e) => {
+    // Keep select in sync with current image's method
+    const handleMethodChange = (e) => {
+        const method = e.target.value;
+        imageProcessingList[imgIndex].method = method;
+        setSelectedMethod(method);
+        forceUpdate(n => n + 1);
+    }
+
+    // Send images and processing_data to backend
+    const handleAnalyzeClick = async (e) => {
         if (uploadedImages.length === 0) {
             setErrorMsg('⚠️ No se ha subido ninguna imagen.');
             e.preventDefault(); // prevent navigation
@@ -131,9 +161,14 @@ const ImgUploader = () => {
                                 <label>Seleccionar imágenes</label>
                                 <input name="images" id='upload-images' type='file' accept='image/png' multiple onChange={getFiles} className='img-input'/>
                             </div>
- 
                             <button onClick={setProcessingMethodSelection} className='secondary-btn'>Procesar imagen</button>
-                            <select name='methods' id='processing-methods-select'>
+                            <select
+                                name='methods'
+                                id='processing-methods-select'
+                                value={imageProcessingList[imgIndex]?.method || ""}
+                                onChange={handleMethodChange}
+                            >
+                                <option value=''>Selecciona un método</option>
                                 <option value='gaussian_noise'>Ruido Gaussiano</option>
                                 <option value='gaussian_filter'>Desenfoque Gaussiano</option>
                                 <option value='random_brightness_contrast'>Brillo aleatorio</option>
