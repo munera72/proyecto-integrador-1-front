@@ -81,7 +81,7 @@ const ImgUploader = () => {
         setDisplayedImage(uploadedImages[imgIndex])
     }
 
-    const displayProcessingMethodSelection = () => {
+    const setProcessingMethodSelection = () => {
         console.log(document.getElementById('processing-methods-select').value)
     }
 
@@ -131,14 +131,15 @@ const ImgUploader = () => {
                                 <label>Seleccionar imágenes</label>
                                 <input name="images" id='upload-images' type='file' accept='image/png' multiple onChange={getFiles} className='img-input'/>
                             </div>
-{/* 
-                            <button onClick={displayProcessingMethodSelection} className='secondary-btn'>Procesar imagen</button>
+ 
+                            <button onClick={setProcessingMethodSelection} className='secondary-btn'>Procesar imagen</button>
                             <select name='methods' id='processing-methods-select'>
-                                <option value='gauss'>Filtro Gaussiano</option>
-                                <option value='mediana'>Filtro de Mediana</option>
-                                <option value='contorno'>Mejora de Contorno</option>
-                                <option value='segmentar'>Segmentación</option>
-                            </select> */}
+                                <option value='gaussian_noise'>Ruido Gaussiano</option>
+                                <option value='gaussian_filter'>Desenfoque Gaussiano</option>
+                                <option value='random_brightness_contrast'>Brillo aleatorio</option>
+                                <option value='random_rotation'>Rotación aleatoria</option>
+                                <option value='horizontal_flip'>Reflección Horizontal</option>
+                            </select>
                         </div>
                         <button className="analyze-button primary-btn" disabled={isAnalyzeDisabled} onClick={handleAnalyzeClick}>
                             Analizar
