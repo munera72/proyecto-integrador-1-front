@@ -100,6 +100,10 @@ const ImgUploader = () => {
 
     // When user selects a method for the current image
     const setProcessingMethodSelection = () => {
+        if (!isAnalyzeDisabled) {
+            return
+        }
+
         const method = document.getElementById('processing-methods-select').value;
         imageProcessingList[imgIndex].method = method;
         setSelectedMethod(method);
@@ -134,9 +138,8 @@ const ImgUploader = () => {
                     <div className="info-content">
                         <h3>Recuerda que</h3>
                         <ul>
-                            <li>La imagen no debe ser mayor a 5MB</li>
                             <li>La imagen debe estar en formato PNG</li>
-                            <li>Las proporciones deben ser 512x512</li>
+                            <li>Las proporciones deben ser 256x256</li>
                             <li>La resolución aceptada es de 300dpi</li>
                             <li>Sólo puedes subir hasta 10 imágenes</li>
                         </ul>
@@ -161,7 +164,7 @@ const ImgUploader = () => {
                                 <label>Seleccionar imágenes</label>
                                 <input name="images" id='upload-images' type='file' accept='image/png' multiple onChange={getFiles} className='img-input'/>
                             </div>
-                            <button onClick={setProcessingMethodSelection} className='secondary-btn'>Procesar imagen</button>
+                            <button disabled={isAnalyzeDisabled} onClick={setProcessingMethodSelection} id='filter-btn' className='secondary-btn'>Usar filtro</button>
                             <select
                                 name='methods'
                                 id='processing-methods-select'
