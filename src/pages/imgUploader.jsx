@@ -138,9 +138,6 @@ const ImgUploader = () => {
                     <div className="info-content">
                         <h3>Recuerda que</h3>
                         <ul>
-                            <li>La imagen debe estar en formato PNG</li>
-                            <li>Las proporciones deben ser 256x256</li>
-                            <li>La resolución aceptada es de 300dpi</li>
                             <li>Sólo puedes subir hasta 10 imágenes</li>
                         </ul>
                         {errorMsg && <p style={{ color: 'red', marginTop: '10px' }}>{errorMsg}</p>}
